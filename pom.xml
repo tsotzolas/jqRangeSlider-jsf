@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsotzolas</groupId>
+    <groupId>com.github.tsotzolas</groupId>
     <artifactId>jqRangeSlider-jsf</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
@@ -32,11 +32,11 @@
     </distributionManagement>
 
 
-<!--    <scm>-->
-<!--        <url>https://github.com/tsotzolas/jqRangeSlider-jsf</url>-->
-<!--        <connection>scm:git:git://github.com/tsotzolas/jqRangeSlider-jsf.git</connection>-->
-<!--        <developerConnection>scm:git:git@github.com:/tsotzolas/jqRangeSlider-jsf.git</developerConnection>-->
-<!--    </scm>-->
+    <scm>
+        <url>https://github.com/tsotzolas/jqRangeSlider-jsf</url>
+        <connection>scm:git:git://github.com/tsotzolas/jqRangeSlider-jsf.git</connection>
+        <developerConnection>scm:git:git@github.com:/tsotzolas/jqRangeSlider-jsf.git</developerConnection>
+    </scm>
 
     <developers>
         <developer>
