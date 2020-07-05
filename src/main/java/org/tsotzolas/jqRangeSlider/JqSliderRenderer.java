@@ -41,13 +41,6 @@ public class JqSliderRenderer extends Renderer {
         String valValue = findIdString(jqSlider.getClientId())+":"+inputHiddenId;
         String valId = jqSlider.getClientId() ;
 
-//        writer.startElement("input", jqSlider);
-//        writer.writeAttribute("type", "hidden", null);
-//        writer.writeAttribute("id", jsId(valValue), null);
-//        writer.writeAttribute("value", jsId(valValue), null);
-//        writer.endElement("input");
-
-
         String mindateString = sdf.format(mindate);
         String maxdateString = sdf.format(maxdate);
         String mindefaultdateString = sdf.format(mindefaultdate);
@@ -77,7 +70,7 @@ public class JqSliderRenderer extends Renderer {
     }
 
     /**
-     *Επιστρεφει το preffix του id της φορμας.
+     * Return the id preffix for the form.
      * @return
      */
     private String findIdString(String inputString){
