@@ -11,8 +11,8 @@
 
     <name>JQ Range Slider JSF Component</name>
     <description>JSF component for the JqRangeSlider jQuery plugin</description>
-
     <url>https://github.com/tsotzolas/jqRangeSlider-jsf</url>
+
 
     <licenses>
         <license>
@@ -23,19 +23,34 @@
     </licenses>
 
 
+    <!--    <distributionManagement>-->
+    <!--        <repository>-->
+    <!--            <id>github</id>-->
+    <!--            <name>GitHub Tsotzolas Apache Maven Packages</name>-->
+    <!--            <url>https://maven.pkg.github.com/tsotzolas/jqRangeSlider-jsf</url>-->
+    <!--        </repository>-->
+    <!--    </distributionManagement>-->
+
     <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>github</id>
-            <name>GitHub Tsotzolas Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tsotzolas/jqRangeSlider-jsf</url>
+            <id>sonatype-nexus-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
-
+    <!--    <scm>-->
+    <!--        <url>https://github.com/tsotzolas/jqRangeSlider-jsf</url>-->
+    <!--        <connection>scm:git:git://github.com/tsotzolas/jqRangeSlider-jsf.git</connection>-->
+    <!--        <developerConnection>scm:git:git@github.com:/tsotzolas/jqRangeSlider-jsf.git</developerConnection>-->
+    <!--    </scm>-->
     <scm>
-        <url>https://github.com/tsotzolas/jqRangeSlider-jsf</url>
-        <connection>scm:git:git://github.com/tsotzolas/jqRangeSlider-jsf.git</connection>
-        <developerConnection>scm:git:git@github.com:/tsotzolas/jqRangeSlider-jsf.git</developerConnection>
+        <connection>scm:git:git://github.com/simpligility/ossrh-demo.git</connection>
+        <developerConnection>scm:git:ssh://github.com:tsotzolas/jqRangeSlider-jsf.git</developerConnection>
+        <url>https://github.com/tsotzolas/jqRangeSlider-jsf/tree/master</url>
     </scm>
 
     <developers>
@@ -61,70 +76,109 @@
         </dependency>
     </dependencies>
 
+    <!--    <build>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-source-plugin</artifactId>-->
+    <!--                <version>2.2.1</version>-->
+    <!--                <executions>-->
+    <!--                    <execution>-->
+    <!--                        <id>attach-sources</id>-->
+    <!--                        <goals>-->
+    <!--                            <goal>jar-no-fork</goal>-->
+    <!--                        </goals>-->
+    <!--                    </execution>-->
+    <!--                </executions>-->
+    <!--            </plugin>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+    <!--                <version>2.9.1</version>-->
+
+    <!--                <executions>-->
+    <!--                    <execution>-->
+    <!--                        <id>attach-javadocs</id>-->
+    <!--                        <goals>-->
+    <!--                            <goal>jar</goal>-->
+    <!--                        </goals>-->
+    <!--                    </execution>-->
+    <!--                </executions>-->
+
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--    </build>-->
 
 
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+        <profile>
+            <id>java8-doclint-disabled</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <plugins>
-
-            <!-- Add sources -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Add Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <configuration>
-                    <show>private</show>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
+                <version>2.9.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                        <configuration>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <configuration>
+                                <additionalparam>${javadoc.opts}</additionalparam>
+                            </configuration>
+                        </plugin>
+                    </reportPlugins>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-<!--    <profiles>-->
-<!--        <profile>-->
-<!--            <id>release</id>-->
-<!--            <build>-->
-<!--                <plugins>-->
-<!--                    <plugin>-->
-<!--                        <groupId>org.apache.maven.plugins</groupId>-->
-<!--                        <artifactId>maven-gpg-plugin</artifactId>-->
-<!--                        <version>1.6</version>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <id>sign-artifacts</id>-->
-<!--                                <phase>verify</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>sign</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                    </plugin>-->
-<!--                </plugins>-->
-<!--            </build>-->
-<!--        </profile>-->
-<!--    </profiles>-->
 
 </project>

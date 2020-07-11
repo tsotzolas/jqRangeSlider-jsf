@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Utility class to find jQuery script resource in deployed application.
  *
- * @author Jasper de Vries <jepsar@gmail.com>
+ * @author Jasper de Vries jepsar@gmail.com
  */
 public class JQuery
 {
